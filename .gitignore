@@ -1,0 +1,9 @@
+*.in
+*.out
+__pycache__
+
+**/bathroom_stalls/bathroom_stalls
+**/fashion_show/fashion_show
+**/oversized_pancake_flipper/oversized_pancake_flipper
+**/tidy_numbers/tidy_numbers
+**/googlements/googlements
