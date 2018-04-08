@@ -1,5 +1,6 @@
 import math
 
+
 def solve(pancakes, stack_size):
     max_surface_area = 0
     for i, head in enumerate(pancakes):
@@ -13,6 +14,7 @@ def solve(pancakes, stack_size):
         if surface_area > max_surface_area:
             max_surface_area = surface_area
     return max_surface_area
+
 
 n_tests = int(input())
 
