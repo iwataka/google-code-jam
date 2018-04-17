@@ -6,7 +6,7 @@ from main import *
 class TestMain(unittest.TestCase):
 
     def test_solve(self):
-        ans = solve()
+        ans = solve(0, 0)
         self.assertEqual(ans, 0)
 
 if __name__ == '__main__':

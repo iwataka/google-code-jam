@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 
-def solve():
-    # TODO: Solve problems here
+def solve(a, b):
     return 0
 
 if __name__ == '__main__':
     n_tests = int(input())
     for i in range(n_tests):
-        # TODO: Get more inputs per test case
-        # For example:
-        # xs = [int(x) for x in input().split()]
-        ans = solve()
+        a, b = map(int, input().split())
+        ans = solve(a, b)
         print("Case #%d: %d" % (i + 1, ans))
