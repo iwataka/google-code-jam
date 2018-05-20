@@ -101,6 +101,7 @@ def solve(C, R, M, field):
             raise Exception(maxbpm)
 
     maxbpm = correct(maxbpm, shootable_turrets_list, turrets)
+    maxbpm = resolve_deadlocks(maxbpm, shootable_turrets_list, turrets)
 
     pairs = []
     for i_r, row in enumerate(maxbpm):
@@ -110,7 +111,6 @@ def solve(C, R, M, field):
     return len(pairs), pairs
 
 
-# TODO: Resolve deadlocks
 def correct(maxbpm, shootable_turrets_list, turrets):
     shooted_turrets = set()
     for _, row in enumerate(maxbpm):
@@ -136,6 +136,64 @@ def correct(maxbpm, shootable_turrets_list, turrets):
                     if exit:
                         break
     return maxbpm
+
+
+def resolve_deadlocks(bpm, shootable_turrets_list, turrets):
+    while True:
+        deadlock = get_deadlock(bpm, shootable_turrets_list, turrets)
+        if deadlock:
+            for i, pair in enumerate(deadlock):
+                i_s, i_t = pair
+                _, _i_t = deadlock[i - 1]
+                bpm[i_s][i_t] = 0
+                bpm[i_s][_i_t] = 1
+        else:
+            break
+    return bpm
+
+
+def get_deadlock(bpm, shootable_turrets_list, turrets):
+    queue = []
+
+    for i_s, row in enumerate(bpm):
+        try:
+            i_t = row.index(1)
+        except Exception:
+            continue
+        first_nonempty_ts = next(
+            ts for ts in shootable_turrets_list[i_s] if len(ts) > 0)
+        if turrets[i_t] not in first_nonempty_ts:
+            queue.append([(i_s, i_t)])
+
+    while True:
+        try:
+            path = queue.pop()
+            i_s, i_t = path[-1]
+        except Exception:
+            break
+
+        for _i_s, _shootable_turrets in enumerate(shootable_turrets_list):
+            if i_s == _i_s:
+                continue
+
+            try:
+                _i_t = bpm[_i_s].index(1)
+            except Exception:
+                continue
+
+            turret = turrets[i_t]
+            _turret = turrets[_i_t]
+            _i_list = next(i for i, ts in enumerate(
+                _shootable_turrets) if _turret in ts)
+            if any(_ts for _ts in _shootable_turrets[:_i_list] if turret in _ts):
+                try:
+                    return path[path.index((_i_s, _i_t)):]
+                except Exception:
+                    pass
+                # path.append((_i_s, _i_t))
+                queue.append(path + [(_i_s, _i_t)])
+            else:
+                continue
 
 
 def get_shootable_turrets(x, y, max_M, C, R, field, visited_cache=None, visited=None):
