@@ -11,12 +11,13 @@ def calc_maxbpm(graph):
 
     while True:
         changed = False
-        for path in find_alternating_path(graph, connections):
+        path = find_alternating_path(graph, connections)
+        if path is not None:
             for i in range(len(path)):
                 if i % 2 == 0:
                     connections[path[i]] = path[i + 1]
                     changed = True
-                else:
+                elif i + 1 < len(path):
                     connections[path[i + 1]] = -1
         if not changed:
             break
@@ -28,23 +29,23 @@ def calc_maxbpm(graph):
 
     return maxbpm
 
+
 def find_alternating_path(graph, connections):
     not_adj_dests = []
     for i, adj in enumerate(connections):
-        if adj != -1:
-            break
-        not_adj_dests.append(i)
+        if adj == -1:
+            not_adj_dests.append(i)
 
     queue = []
 
     for i_d in not_adj_dests:
-        for i_s, row in enumerate(graph):
-            if row[i_d] == 1 and connections[i_d] != i_s:
-                queue.append(([i_d, i_s]))
+        for i_s in range(len(graph)):
+            if graph[i_s][i_d] == 1:
+                queue.append([i_d, i_s])
 
     while True:
         try:
-            path = queue.pop(0)
+            path = queue.pop()
         except IndexError:
             break
 
@@ -52,7 +53,7 @@ def find_alternating_path(graph, connections):
             i1 = connections.index(path[-1])
         except ValueError:
             if len(path) >= 3:
-                yield path
+                return path
             else:
                 continue
 
@@ -60,7 +61,12 @@ def find_alternating_path(graph, connections):
 
         for i_s, row in enumerate(graph):
             if row[i1] == 1 and connections[i1] != i_s:
-                queue.append((path + [i_s]))
+                loop = False
+                for i, _i in enumerate(path):
+                    if i % 2 == 1 and i_s == _i:
+                        loop = True
+                if not loop:
+                    queue.append((path + [i_s]))
 
 
 def solve(C, R, M, field):
@@ -72,6 +78,7 @@ def solve(C, R, M, field):
                 soldiers.append((r, c))
             elif cell == 'T':
                 turrets.append((r, c))
+
     bp_graph = []
     for i_s in range(len(soldiers)):
         bp_graph.append([0] * len(turrets))
@@ -86,38 +93,46 @@ def solve(C, R, M, field):
             for t in ts:
                 i_t = turrets.index(t)
                 bp_graph[i_s][i_t] = 1
-    max_bpm = calc_maxbpm(bp_graph)
+
+    maxbpm = calc_maxbpm(bp_graph)
+
+    for row in maxbpm:
+        if not 0 <= sum(row) <= 1:
+            raise Exception(maxbpm)
+
     while True:
-        max_bpm, corrected = correct(max_bpm, shootable_turrets_list, turrets)
+        maxbpm, corrected = correct(maxbpm, shootable_turrets_list, turrets)
         if not corrected:
             break
+
     pairs = []
-    for i_r, row in enumerate(max_bpm):
+    for i_r, row in enumerate(maxbpm):
         for i_c, num in enumerate(row):
             if num == 1:
                 pairs.append((i_r, i_c))
     return len(pairs), pairs
 
 
-def correct(max_bpm, shootable_turrets_list, turrets):
+# TODO: Resolve deadlocks
+def correct(maxbpm, shootable_turrets_list, turrets):
     corrected = False
     shooted_turrets = set()
-    for i_s, row in enumerate(max_bpm):
-        for i_t, cell in enumerate(row):
-            if cell == 1:
+    for _, row in enumerate(maxbpm):
+        for i_t, adj in enumerate(row):
+            if adj == 1:
                 shooted_turrets.add(turrets[i_t])
                 break
-    for i_s, row in enumerate(max_bpm):
-        for i_t, cell in enumerate(row):
-            if cell == 1:
+    for i_s, row in enumerate(maxbpm):
+        for i_t, adj in enumerate(row):
+            cur_turret = turrets[i_t]
+            if adj == 1:
                 for shootable_turrets in shootable_turrets_list[i_s]:
-                    cur_turret = turrets[i_t]
                     if cur_turret in shootable_turrets:
                         break
                     exit = False
                     for turret in shootable_turrets - shooted_turrets:
-                        max_bpm[i_s][turrets.index(turret)] = 1
-                        max_bpm[i_s][i_t] = 0
+                        maxbpm[i_s][turrets.index(turret)] = 1
+                        maxbpm[i_s][i_t] = 0
                         exit = True
                         corrected = True
                         shooted_turrets.remove(cur_turret)
@@ -125,7 +140,7 @@ def correct(max_bpm, shootable_turrets_list, turrets):
                         break
                     if exit:
                         break
-    return max_bpm, corrected
+    return maxbpm, corrected
 
 
 def get_shootable_turrets(x, y, max_M, C, R, field, visited_cache=None, visited=None):
