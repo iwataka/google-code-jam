@@ -35,38 +35,38 @@
 #### Round1B
 
 - Cruise Control
-  - [x] Small
-  - [x] Large
+    - [x] Small
+    - [x] Large
 - Stable Neigh-bors
-  - [x] Small
-  - [x] Large
+    - [x] Small
+    - [x] Large
 - Pony Express
-  - [x] Small
-  - [ ] Large
+    - [x] Small
+    - [ ] Large
 
 #### Round1C
 
 - Ample Syrup
-  - [x] Small
-  - [x] Large
+    - [x] Small
+    - [x] Large
 - Parenting Partnering
-  - [x] Small
-  - [x] Large
+    - [x] Small
+    - [x] Large
 - Core Training
-  - [x] Small
-  - [ ] Large
+    - [x] Small
+    - [ ] Large
 
 #### Round2
 
 - Fresh Chocolate
-  - [x] Small
-  - [x] Large
+    - [x] Small
+    - [x] Large
 - Roller Coaster Scheduling
-  - [x] Small
-  - [x] Large
+    - [x] Small
+    - [x] Large
 - Beaming With Joy
-  - [x] Small
-  - [x] Large
+    - [x] Small
+    - [x] Large
 - Shoot the Turrets
-  - [ ] Small
-  - [ ] Large
+    - [ ] Small
+    - [ ] Large
