@@ -92,16 +92,14 @@ class TestMain(unittest.TestCase):
         maxbpm = [[0, 0, 1]]
         shootable_turrets_list = [[set(), set(), {(1, 2)}, {(2, 3)}]]
         turrets = [(1, 2), (3, 2), (2, 3)]
-        bpm, corrected = correct(maxbpm, shootable_turrets_list, turrets)
-        self.assertTrue(corrected)
+        bpm = correct(maxbpm, shootable_turrets_list, turrets)
         self.assertEqual(bpm, [[1, 0, 0]])
 
         maxbpm = [[0, 0, 1], [1, 0, 0]]
         shootable_turrets_list = [[set(), set(), {(1, 2)}, {(2, 3)}], [
             {(1, 2)}, set(), set(), set()]]
         turrets = [(1, 2), (3, 2), (2, 3)]
-        bpm, corrected = correct(maxbpm, shootable_turrets_list, turrets)
-        self.assertFalse(corrected)
+        bpm = correct(maxbpm, shootable_turrets_list, turrets)
         self.assertEqual(bpm, maxbpm)
 
 
