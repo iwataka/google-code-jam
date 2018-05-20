@@ -15,7 +15,7 @@
 - Bathroom Stalls
     - [x] Small1
     - [x] Small2
-    - [ ] Large
+    - [x] Large
 - Fashion Show
     - [x] Small
     - [x] Large
