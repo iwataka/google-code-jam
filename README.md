@@ -68,5 +68,5 @@
     - [x] Small
     - [x] Large
 - Shoot the Turrets
-    - [ ] Small
+    - [x] Small
     - [ ] Large

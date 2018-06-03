@@ -95,15 +95,47 @@ def solve(C, R, M, field):
         if not 0 <= sum(row) <= 1:
             raise Exception(maxbpm)
 
-    maxbpm = correct(maxbpm, shootable_turrets_list, turrets)
-    maxbpm = resolve_deadlocks(maxbpm, shootable_turrets_list, turrets)
+    while True:
+        maxbpm, changed1 = correct(maxbpm, shootable_turrets_list, turrets)
+        maxbpm, changed2 = resolve_deadlocks(maxbpm, shootable_turrets_list, turrets)
+        if not changed1 and not changed2:
+            break
 
     pairs = []
     for i_r, row in enumerate(maxbpm):
         for i_c, num in enumerate(row):
             if num == 1:
                 pairs.append((i_r, i_c))
+
+    pairs = sort_answer(pairs, shootable_turrets_list)
     return len(pairs), pairs
+
+
+def sort_answer(pairs, shootable_turrets_lists):
+    ps = list(pairs)
+    shooted_turrets = []
+    result = []
+
+    while ps:
+        exist = False
+        for pair in ps:
+            soldier, turret = pair
+            shootable_turrets_list = shootable_turrets_lists[soldier]
+            first_noempty_turrets = next(ts for ts in shootable_turrets_list if ts and not all(x in shooted_turrets for x in ts))
+            if turret in first_noempty_turrets:
+                shooted_turrets.append(turret)
+                ps.remove(pair)
+                result.append(pair)
+                exist = True
+                break
+        if not exist:
+            for soldier, shootable_turrets_list in enumerate(shootable_turrets_lists):
+                print(soldier + 1, [list(map(lambda x: x + 1, [t for t in ts if t not in shooted_turrets])) for ts in shootable_turrets_list])
+            for soldier, turret in ps:
+                print(soldier + 1, turret + 1)
+            raise AssertionError
+
+    return result
 
 
 def correct(maxbpm, shootable_turrets_list, turrets):
@@ -114,6 +146,7 @@ def correct(maxbpm, shootable_turrets_list, turrets):
                 shooted_turrets.add(i_t)
                 break
 
+    changed = False
     for i_s, row in enumerate(maxbpm):
         for i_t, adj in enumerate(row):
             if adj == 1:
@@ -124,16 +157,18 @@ def correct(maxbpm, shootable_turrets_list, turrets):
                     for i_turret in shootable_turrets - shooted_turrets:
                         maxbpm[i_s][i_turret] = 1
                         maxbpm[i_s][i_t] = 0
+                        changed = True
                         exit = True
                         shooted_turrets.remove(i_t)
                         shooted_turrets.add(i_turret)
                         break
                     if exit:
                         break
-    return maxbpm
+    return maxbpm, changed
 
 
 def resolve_deadlocks(bpm, shootable_turrets_list, turrets):
+    changed = False
     while True:
         deadlock = get_deadlock(bpm, shootable_turrets_list, turrets)
         if deadlock:
@@ -142,9 +177,10 @@ def resolve_deadlocks(bpm, shootable_turrets_list, turrets):
                 _, another_i_t = deadlock[i - 1]
                 bpm[i_s][i_t] = 0
                 bpm[i_s][another_i_t] = 1
+                changed = True
         else:
             break
-    return bpm
+    return bpm, changed
 
 
 def get_deadlock(bpm, shootable_turrets_list, turrets):
