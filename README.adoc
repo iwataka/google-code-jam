@@ -1,0 +1,189 @@
+:checked: &#10003;
+:unchecked:
+:codejam_url_prefix_2017: https://code.google.com/codejam/contest/
+
+= Google Code Jam
+
+My practice codes for https://codingcompetitions.withgoogle.com/codejam[Google Code Jam]
+
+== 2017
+
+[cols="2,3,1,1"]
+|===
+|Round|Problem|Small|Large
+.4+|{codejam_url_prefix_2017}3264486/dashboard[Qualification Round]
+|Oversized Pancake Flipper
+|{checked}
+|{checked}
+|Tidy Numbers
+|{checked}
+|{checked}
+|Bathroom Stalls
+|{checked}
+|{checked}
+|Fashion Show
+|{checked}
+|{checked}
+.3+|{codejam_url_prefix_2017}5304486/dashboard[Round1A]
+|Alphabet Cake
+|{checked}
+|{checked}
+|Ratatouille
+|{checked}
+|{checked}
+|Play the dragon
+|{checked}
+|{unchecked}
+.3+|{codejam_url_prefix_2017}8294486/dashboard[Round1B]
+|Cruise Control
+|{checked}
+|{checked}
+|Stable Neigh-bors
+|{checked}
+|{checked}
+|Pony Express
+|{checked}
+|{unchecked}
+.3+|{codejam_url_prefix_2017}3274486/dashboard[Round1C]
+|Ample Syrup
+|{checked}
+|{checked}
+|Parenting Partnering
+|{checked}
+|{checked}
+|Core Training
+|{checked}
+|{unchecked}
+.4+|{codejam_url_prefix_2017}5314486/dashboard[Round2]
+|Fresh Chocolate
+|{checked}
+|{checked}
+|Roller Coaster Scheduling
+|{checked}
+|{checked}
+|Beaming With Joy
+|{checked}
+|{checked}
+|Shoot the Turrets
+|{checked}
+|{unchecked}
+.4+|{codejam_url_prefix_2017}8304486/dashboard[Round3]
+|Googlements
+|{unchecked}
+|{unchecked}
+|Good News and Bad News
+|{unchecked}
+|{unchecked}
+|Mountain Tour
+|{unchecked}
+|{unchecked}
+|Slate Modern
+|{unchecked}
+|{unchecked}
+.6+|{codejam_url_prefix_2017}6314486/dashboard[World Finals]
+|Dice Straight
+|{unchecked}
+|{unchecked}
+|Operation
+|{unchecked}
+|{unchecked}
+|Spanning Planning
+|{unchecked}
+|{unchecked}
+|Omnicircumnavigation
+|{unchecked}
+|{unchecked}
+|Stack Management
+|{unchecked}
+|{unchecked}
+|Teleporters
+|{unchecked}
+|{unchecked}
+|===
+
+== 2018
+
+[cols="2,3,1,1"]
+|===
+|Round|Problem|Small|Large
+.3+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000000130[Practice Session]
+|Senate Evacuation
+|{checked}
+|{checked}
+|Number Guessing
+|{checked}
+|{checked}
+|Steed 2: Cruise Control
+|{checked}
+|{checked}
+.3+|https://codingcompetitions.withgoogle.com/codejam/round/00000000000000cb[Qualification Round]
+|Saving The Universe Again
+|{checked}
+|{checked}
+|Trouble Sort
+|{checked}
+|{checked}
+|Go, Gopher!
+|{checked}
+|{checked}
+.3+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000007883[Round1A]
+|Waffle Choppers
+|{checked}
+|{checked}
+|Bit Party
+|{unchecked}
+|{unchecked}
+|Edgy Baking
+|{checked}
+|{checked}
+.3+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000007764[Round1B]
+|Rounding Error
+|{unchecked}
+|{unchecked}
+|Mysterious Road Signs
+|{unchecked}
+|{unchecked}
+|Transmutation
+|{unchecked}
+|{unchecked}
+.3+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000007883[Round1C]
+|A Whole New Word
+|{unchecked}
+|{unchecked}
+|Lollipop Shop
+|{unchecked}
+|{unchecked}
+|Ant Stack
+|{unchecked}
+|{unchecked}
+.3+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000007706[Round2]
+|Falling Balls
+|{checked}
+|{checked}
+|Graceful Chainsaw Jugglers
+|{unchecked}
+|{unchecked}
+|Costume Change
+|{unchecked}
+|{unchecked}
+.3+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000007707[Round3]
+|Field Trip
+|{unchecked}
+|{unchecked}
+|Name-Preserving Network
+|{unchecked}
+|{unchecked}
+|Raise the Roof
+|{unchecked}
+|{unchecked}
+.3+|{codejam_url_prefix_2017}6314486/dashboard[World Finals]
+|Two-Tiling
+|{unchecked}
+|{unchecked}
+|Jurisdiction Restrictions
+|{unchecked}
+|{unchecked}
+|Swordmaster
+|{unchecked}
+|{unchecked}
+|===
