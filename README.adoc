@@ -131,8 +131,8 @@ My practice codes for https://codingcompetitions.withgoogle.com/codejam[Google C
 |{checked}
 |{checked}
 |Bit Party
-|{unchecked}
-|{unchecked}
+|{checked}
+|{checked}
 |Edgy Baking
 |{checked}
 |{checked}
