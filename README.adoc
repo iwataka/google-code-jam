@@ -138,7 +138,7 @@ My practice codes for https://codingcompetitions.withgoogle.com/codejam[Google C
 |{checked}
 .3+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000007764[Round1B]
 |Rounding Error
-|{unchecked}
+|{checked}
 |{unchecked}
 |Mysterious Road Signs
 |{unchecked}
