@@ -105,7 +105,7 @@ My practice codes for https://codingcompetitions.withgoogle.com/codejam[Google C
 
 [cols="2,3,1,1"]
 |===
-|Round|Problem|Small|Large
+|Round|Problem|Visible|Hidden
 .3+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000000130[Practice Session]
 |Senate Evacuation
 |{checked}
@@ -139,7 +139,7 @@ My practice codes for https://codingcompetitions.withgoogle.com/codejam[Google C
 .3+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000007764[Round1B]
 |Rounding Error
 |{checked}
-|{unchecked}
+|{checked}
 |Mysterious Road Signs
 |{unchecked}
 |{unchecked}

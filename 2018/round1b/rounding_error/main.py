@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from heapq import heappush, heappop
+import math
 
 def solve():
     sum_cs = sum(cs)
@@ -27,6 +28,14 @@ def calc_result():
 
 
 def gap_until_roundup(c, m):
+    sub_gap = 100 / n
+    if sub_gap < 0.5:
+        num = c * 100 / n
+        float_digit = num - int(num)
+        if float_digit >= 0.5:
+            return 0
+        else:
+            return math.ceil((0.5 - float_digit) / sub_gap)
     count = 0
     while not can_roundup(c + count) and count < m:
         count += 1
@@ -35,12 +44,12 @@ def gap_until_roundup(c, m):
 
 def can_roundup(c):
     num = c * 100 / n
-    return round_num(num) > num
+    return num - int(num) >= 0.5
 
 
 def round_num(num):
     i_num = int(num)
-    if num >= i_num + 0.5:
+    if num - i_num >= 0.5:
         return i_num + 1
     return i_num
 
