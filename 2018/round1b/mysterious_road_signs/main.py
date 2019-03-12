@@ -1,19 +1,22 @@
 #!/usr/bin/env python
 
+import collections
+
+
+Subseq = collections.namedtuple('Subseq', ('start', 'end', 'M', 'N'))
+
+
 def solve(signs):
     queue = [(0, len(signs) - 1)]
     max_size = 0
     max_count = 0
+    # TODO: priority queue
     while queue:
         start_i, end_i = queue.pop()
         if end_i - start_i + 1 < max_size:
             continue
         size, count = longetst_path_from_center(signs, start_i, end_i)
-        if size > max_size:
-            max_size = size
-            max_count = count
-        elif size == max_size:
-            max_count += count
+        max_size, max_count = append_size(max_size, max_count, size, count)
         mid_i = (start_i + end_i) // 2
         if start_i <= mid_i - 1:
             queue.append((start_i, mid_i - 1))
@@ -24,61 +27,76 @@ def solve(signs):
 
 def longetst_path_from_center(signs, s, e):
     mid_i = (s + e) // 2
-    n_low, i_n_low = walkthrough(signs, mid_i, s, 0)
-    n_high, i_n_high = walkthrough(signs, mid_i, e, 0)
-    m_low, i_m_low = walkthrough(signs, mid_i, s, 1)
-    m_high, i_m_high = walkthrough(signs, mid_i, e, 1)
-    fix_n = signs[mid_i][1]
-    queue = []
-    if n_low == n_high and n_low != fix_n:
-        size = i_n_high - i_n_low + 1
-        queue.append((size, i_n_low, i_n_high))
-    else:
-        if n_low != fix_n:
-            queue.append((mid_i - i_n_low + 1, i_n_low, mid_i))
-        if n_high != fix_n:
-            queue.append((i_n_high - mid_i + 1, mid_i, i_n_high))
-    if m_low == m_high:
-        size = i_m_high - i_m_low + 1
-        queue.append((size, i_m_low, i_m_high))
-    else:
-        queue.append((mid_i - i_m_low + 1, i_m_low, mid_i))
-        queue.append((i_m_high - mid_i + 1, mid_i, i_m_high))
+    subseq_list = []
+    subseq_list.append(walkthrough(signs, mid_i, s, 0))
+    subseq_list.append(walkthrough(signs, mid_i, e, 0))
+    subseq_list.append(walkthrough(signs, mid_i, s, 1))
+    subseq_list.append(walkthrough(signs, mid_i, e, 1))
+    nums2range = {}
+    for M, N, start, end in subseq_list:
+        if not (M, N) in nums2range:
+            nums2range[(M, N)] = (start, end)
+        else:
+            cur_start, cur_end = nums2range[(M, N)]
+            new_start = start if start < cur_start else cur_start
+            new_end = end if end > cur_end else cur_end
+            nums2range[(M, N)] = (new_start, new_end)
+
+    sizes = map(lambda x: x[1] - x[0] + 1, set(nums2range.values()))
+    
     max_size = 0
-    queue = list(set(queue))
-    for size, _, _ in queue:
-        if size > max_size:
-            max_size = size
-            max_count = 1
-        elif size == max_size:
-            max_count += 1
+    max_count = 0
+    for size in sizes:
+        max_size, max_count = append_size(max_size, max_count, size, 1)
     return max_size, max_count
 
 
-def walkthrough(signs, start_i, end_i, fix_i):
-    fix_val = signs[start_i][fix_i]
-    another_i = 0 if fix_i else 1
-    if start_i == end_i:
-        return signs[start_i][another_i], start_i
-    another_val = None
-    term_i = None
-    direction = (end_i - start_i) // abs(end_i - start_i)
-    for i in range(start_i + direction, end_i + direction, direction):
-        term_i = i
+def append_size(cur_max_size, cur_max_count, size, count):
+    if size > cur_max_size:
+        return size, count
+    elif size == cur_max_size:
+        return size, cur_max_count + count
+    else:
+        return cur_max_size, cur_max_count
+
+
+def walkthrough(signs, i_start, i_end, i_fix):
+    i_not_fix = 0 if i_fix else 1
+    if i_start == i_end:
+        return signs[i_start][0], signs[i_start][1], i_start, i_start
+    fix_val = signs[i_start][i_fix]
+    not_fix_val = None
+    i_subseq_end = None
+    direction = 1 if i_end > i_start else -1
+
+    for i in range(i_start + direction, i_end + direction, direction):
+        i_subseq_end = i
         sign = signs[i]
-        if sign[fix_i] == fix_val:
+        if sign[i_fix] == fix_val:
             continue
-        elif another_val is None:
-            another_val = sign[another_i]
+        if not_fix_val is None:
+            not_fix_val = sign[i_not_fix]
             continue
-        elif sign[another_i] == another_val:
+        if sign[i_not_fix] == not_fix_val:
             continue
-        else:
-            term_i = i - direction
-            break
-    if another_val is None:
-        another_val = signs[start_i][another_i]
-    return another_val, term_i
+        i_subseq_end = i - direction
+        break
+    if not_fix_val is None:
+        not_fix_val = signs[i_start][i_not_fix]
+
+    if i_fix == 0:
+        M = fix_val
+        N = not_fix_val
+    else:
+        M = not_fix_val
+        N = fix_val
+    if i_start < i_subseq_end:
+        start = i_start
+        end = i_subseq_end
+    else:
+        start = i_subseq_end
+        end = i_start
+    return M, N, start, end
 
 
 def solve_all():
