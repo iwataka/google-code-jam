@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 
-import collections
-
-
-Subseq = collections.namedtuple('Subseq', ('start', 'end', 'M', 'N'))
-
 
 def solve(signs):
     queue = [(0, len(signs) - 1)]
@@ -32,6 +27,7 @@ def longetst_path_from_center(signs, s, e):
     subseq_list.append(walkthrough(signs, mid_i, e, 0))
     subseq_list.append(walkthrough(signs, mid_i, s, 1))
     subseq_list.append(walkthrough(signs, mid_i, e, 1))
+
     nums2range = {}
     for M, N, start, end in subseq_list:
         if not (M, N) in nums2range:
@@ -43,7 +39,7 @@ def longetst_path_from_center(signs, s, e):
             nums2range[(M, N)] = (new_start, new_end)
 
     sizes = map(lambda x: x[1] - x[0] + 1, set(nums2range.values()))
-    
+
     max_size = 0
     max_count = 0
     for size in sizes:
@@ -61,9 +57,10 @@ def append_size(cur_max_size, cur_max_count, size, count):
 
 
 def walkthrough(signs, i_start, i_end, i_fix):
-    i_not_fix = 0 if i_fix else 1
     if i_start == i_end:
         return signs[i_start][0], signs[i_start][1], i_start, i_start
+
+    i_not_fix = 0 if i_fix else 1
     fix_val = signs[i_start][i_fix]
     not_fix_val = None
     i_subseq_end = None
