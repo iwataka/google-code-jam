@@ -3,8 +3,17 @@
 import string
 
 
-def factor(n):
-    for i in range(2, n):
+def factor(n, N):
+    if n % 2 == 0:
+        return 2, n // 2
+
+    min = 3
+    # improve performance by this statements (but failed somewhy)
+    # min = n // N
+    # if min % 2 == 0:
+    #     min += 1
+
+    for i in range(min, N, 2):
         if n % i == 0:
             return i, n // i
 
@@ -16,23 +25,17 @@ def startpos(nums):
 
 
 def decrypt(ns):
-    copied = list(set(ns))
-    copied.sort()
-    n2c = {}
+    copied = sorted(list(set(ns)))
     alphas = string.ascii_uppercase
-    for i, n in enumerate(copied):
-        n2c[n] = alphas[i]
-    result = []
-    for n in ns:
-        result.append(n2c[n])
-    return result
+    n2c = {n: alphas[i] for i, n in enumerate(copied)}
+    return [n2c[n] for n in ns]
 
 
 def solve(N, L, nums):
     ns = []
     start = startpos(nums)
 
-    a, b = factor(nums[start])
+    a, b = factor(nums[start], N)
     nextn = nums[start + 1]
     if nextn % a == 0:
         ns.append(b)

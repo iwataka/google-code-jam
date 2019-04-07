@@ -3,7 +3,7 @@
 import sys
 
 
-def state(N, interval, debug=False):
+def state(N, interval):
     count = 0
     result = ''
     c = '1'
@@ -22,8 +22,6 @@ def state(N, interval, debug=False):
             else:
                 c = '1'
             intervaled = True
-    if debug:
-        raise Exception(str(result))
     print(result)
     sys.stdout.flush()
     return num
@@ -45,13 +43,11 @@ def analyze_first_response(response, state_num):
     return result
 
 
-def answer(ub_nums, debug=False):
+def answer(ub_nums):
     result = []
     for i, n in enumerate(ub_nums):
         if n == 0:
             result.append(str(i))
-    if debug:
-        raise Exception(str(result))
     print(' '.join(result))
     sys.stdout.flush()
 
@@ -77,38 +73,22 @@ if __name__ == '__main__':
         state_num = state(N, 16)
         first_response = input()
         unbroken_nums = analyze_first_response(first_response, state_num)
-        # if i == 2:
-        #     raise Exception(str(N) + ':' + str(unbroken_nums))
 
         state_num = state(N, 8)
         response = input()
-        # if i == 2:
-        #     raise Exception(str(N) + ':' + str(response))
         unbroken_nums = analyze_response(response, unbroken_nums, state_num)
-        # if i == 2:
-        #     raise Exception(str(N) + ':' + str(unbroken_nums))
 
         state_num = state(N, 4)
         response = input()
-        # if i == 2:
-        #     raise Exception(str(N) + ':' + str(response))
         unbroken_nums = analyze_response(response, unbroken_nums, state_num)
-        # if i == 2:
-        #     raise Exception(str(N) + ':' + str(unbroken_nums))
 
         state_num = state(N, 2)
         response = input()
-        # if i == 1:
-        #     raise Exception(str(N) + ':' + str(response))
         unbroken_nums = analyze_response(response, unbroken_nums, state_num)
-        # if i == 2:
-        #     raise Exception(str(N) + ':' + str(unbroken_nums))
 
         state_num = state(N, 1)
         response = input()
         unbroken_nums = analyze_response(response, unbroken_nums, state_num)
-        # if i == 2:
-        #     raise Exception(str(N) + ':' + str(unbroken_nums))
 
         answer(unbroken_nums)
         verdict = int(input())
