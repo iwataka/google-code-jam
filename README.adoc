@@ -187,3 +187,23 @@ My practice codes for https://codingcompetitions.withgoogle.com/codejam[Google C
 |{unchecked}
 |{unchecked}
 |===
+
+== 2019
+
+[cols="2,3,1,1"]
+|===
+|Round|Problem|Visible|Hidden
+.4+|https://codingcompetitions.withgoogle.com/codejam/round/0000000000051705[Qualification Round]
+|Foregone Solution
+|{checked}
+|{checked}
+|You Can Go Your Own
+|{checked}
+|{checked}
+|Cryptopangrams
+|{checked}
+|{unchecked}
+|Dat Bae
+|{checked}
+|{checked}
+|===
