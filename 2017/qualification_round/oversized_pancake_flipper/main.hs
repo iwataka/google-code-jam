@@ -1,4 +1,4 @@
-import Control.Monad
+import           Control.Monad
 
 data Pancake = Happy | Blank deriving (Eq, Show)
 
@@ -18,7 +18,7 @@ main = do
 toPancake c = case c of
     '+' -> Happy
     '-' -> Blank
-    _ -> error $ "Invalid character: " ++ [c]
+    _   -> error $ "Invalid character: " ++ [c]
 
 flipOne p = case p of
     Happy -> Blank

@@ -1,4 +1,4 @@
-import Control.Monad
+import           Control.Monad
 
 data Move = East|South deriving (Eq, Show)
 
@@ -15,14 +15,14 @@ toMove :: Char -> Move
 toMove m = case m of
     'E' -> East
     'S' -> South
-    _ -> error $ "Invalid character: " ++ (show m)
+    _   -> error $ "Invalid character: " ++ (show m)
 
 moveToStr m = case m of
-    East -> "E"
+    East  -> "E"
     South -> "S"
 
 invMove m = case m of
-    East -> South
+    East  -> South
     South -> East
 
 untilConsecutiveMove ms m

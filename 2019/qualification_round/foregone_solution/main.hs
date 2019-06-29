@@ -1,5 +1,5 @@
-import Control.Monad
-import Data.Char
+import           Control.Monad
+import           Data.Char
 
 main = do
     nTests <- readLn
