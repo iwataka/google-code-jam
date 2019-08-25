@@ -141,7 +141,7 @@ My practice codes for https://codingcompetitions.withgoogle.com/codejam[Google C
 |{checked}
 |{checked}
 |Mysterious Road Signs
-|{unchecked}
+|{checked}
 |{unchecked}
 |Transmutation
 |{unchecked}
