@@ -114,8 +114,7 @@ My practice codes for https://codingcompetitions.withgoogle.com/codejam[Google C
 |{checked}
 |{checked}
 |Steed 2: Cruise Control
-|{checked}
-|{checked}
+2+|This is the same quastion as in Round1B in 2017
 .3+|https://codingcompetitions.withgoogle.com/codejam/round/00000000000000cb[Qualification Round]
 |Saving The Universe Again
 |{checked}
